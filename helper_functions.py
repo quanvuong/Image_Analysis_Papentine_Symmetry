@@ -1,4 +1,5 @@
 import numpy as np 
+import copy
 
 def rotate90(matrix): 
     "Rotate the image by 90 degree"
@@ -11,13 +12,13 @@ def rotate180(matrix):
 
     a = rotate90(matrix)
 
-    b = rotate90(a )
+    b = rotate90(a)
 
     return b 
 
-def rotate270(matrix ):
+def rotate270(matrix):
 
-    a = rotate180(matrix )
+    a = rotate180(matrix)
 
     b = rotate90(a)
     
@@ -35,7 +36,7 @@ def merge_sublist(original_list):
 
 def num_mini_matrix(matrix):
     "Return the number of mini-matrix a matrix has"
-    b = len(matrix) - 1 
+    b = len(matrix) - 1
 
     mini_matrix = [[] for i in range(((b)*(b+1)*(2*b+1)/6))] #AllSet is used to contain all the minimatrix of a
 
@@ -45,7 +46,7 @@ def get_mini_matrix(matrix, curr_col,  curr_row, size):
     "Return a mini-matrix knowing the x,y-position of the upper right corner item of the mini-matrix "
     "and the size of the mini-matrix "
 
-    mini_matrix = [] 
+    mini_matrix = []
 
     for i in range(size):
         mini_matrix.append(matrix[curr_row + i][curr_col : curr_col + size])
@@ -103,17 +104,19 @@ def num_pixel_matrix(matrix):
 
 def reflect_pos_diag(matrix):
     "Reflect a matrix along the positive diagonal"
+
+    temp_matrix = copy.deepcopy(matrix)
     for i in range(len(matrix)):
-      matrix[i] = matrix[i][::-1]
+      temp_matrix[i] = temp_matrix[i][::-1]
 
-    matrix = zip(*matrix)
+    temp_matrix = zip(*temp_matrix)
 
-    for i in range(len(matrix)):
-      matrix[i] = matrix[i][::-1]
+    for i in range(len(temp_matrix)):
+      temp_matrix[i] = temp_matrix[i][::-1]
 
-    matrix = np.array(matrix) 
+    temp_matrix = np.array(temp_matrix) 
 
-    return matrix 
+    return temp_matrix 
 
 def reflect_neg_diag(matrix):
     "Reflect a matrix along the negative diagonal"

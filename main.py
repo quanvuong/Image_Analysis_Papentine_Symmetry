@@ -109,6 +109,18 @@ if __name__ == '__main__':
 
 			print dist_symmetry_score(im)
 
+		if picture == 'p2.png':
+			im = convert_image(os.getcwd() + '/' + folder_name + '/' + picture)
+
+			print dist_symmetry_score(im)
+
+		if picture == 'p3.png':
+			im = convert_image(os.getcwd() + '/' + folder_name + '/' + picture)
+
+			print dist_symmetry_score(im)
+
+
+
 	# create_empty_table(folder_name)
 
 

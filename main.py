@@ -88,36 +88,37 @@ if __name__ == '__main__':
 
 	if '.DS_Store' in picture_names: picture_names.remove('.DS_Store')
 
-	# for picture in picture_names:
-	# 	image_matrix = convert_image(os.getcwd() + '/' + folder_name + '/' + picture)
-
-	# 	cont_sym_score = cont_symmetry_score(image_matrix)
-	# 	dist_sym_score = dist_symmetry_score(image_matrix)
-	# 	papentine_score = papentine(image_matrix)
-
-	# 	cont_and_dist_sym_score = merge_dict(cont_sym_score, dist_sym_score)
-
-	# 	image_score[picture] = merge_dict(cont_and_dist_sym_score, papentine_score)
-	# 	print "done with " + picture
-
-	# pprint(image_score)
-
 	for picture in picture_names:
+		image_matrix = convert_image(os.getcwd() + '/' + folder_name + '/' + picture)
 
-		if picture == 'p1.png':
-			im = convert_image(os.getcwd() + '/' + folder_name + '/' + picture)
+		cont_sym_score = cont_symmetry_score(image_matrix)
+		dist_sym_score = dist_symmetry_score(image_matrix)
+		papentine_score = papentine(image_matrix)
 
-			print dist_symmetry_score(im)
+		cont_and_dist_sym_score = merge_dict(cont_sym_score, dist_sym_score)
 
-		if picture == 'p2.png':
-			im = convert_image(os.getcwd() + '/' + folder_name + '/' + picture)
+		image_score[picture] = merge_dict(cont_and_dist_sym_score, papentine_score)
+		print "done with " + picture
 
-			print dist_symmetry_score(im)
+	pprint(image_score)
 
-		if picture == 'p3.png':
-			im = convert_image(os.getcwd() + '/' + folder_name + '/' + picture)
+	# The commentted part below is for debugging 
+	# for picture in picture_names:
 
-			print dist_symmetry_score(im)
+	# 	if picture == 'p1.png':
+	# 		im = convert_image(os.getcwd() + '/' + folder_name + '/' + picture)
+
+	# 		print cont_symmetry_score(im)
+
+	# 	if picture == 'p2.png':
+	# 		im = convert_image(os.getcwd() + '/' + folder_name + '/' + picture)
+
+	# 		print cont_symmetry_score(im)
+
+	# 	if picture == 'p3.png':
+	# 		im = convert_image(os.getcwd() + '/' + folder_name + '/' + picture)
+
+	# 		print cont_symmetry_score(im)
 
 
 

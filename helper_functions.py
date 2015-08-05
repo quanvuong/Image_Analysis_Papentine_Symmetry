@@ -121,9 +121,10 @@ def reflect_pos_diag(matrix):
 def reflect_neg_diag(matrix):
     "Reflect a matrix along the negative diagonal"
 
-    matrix = np.array(zip(*matrix)) 
+    temp_matrix = copy.deepcopy(matrix)
+    temp_matrix = np.array(zip(*temp_matrix)) 
 
-    return matrix 
+    return temp_matrix 
 
 def sort_list_by_length_sublist(mother_list):
     'Sort the content of a list by the length of the sublist in ascending order'

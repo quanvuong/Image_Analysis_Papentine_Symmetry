@@ -3,13 +3,15 @@ import numpy as np
 from helper_functions import * 
 
 def compare_two_matrix_cont(matrix_1, matrix_2):
-    "If two matrix is the same, return the number of pixel in each image, if not, return 0"
-    Count = 0
+    "Return the number of pixels in two matrixes that are the same"
+    num_pixel_same = 0 
 
-    if np.array_equal(matrix_1 , matrix_2) == True: 
-        return num_pixel_matrix(matrix_1)
-    else: 
-        return 0 
+    for i in range(len(matrix_1)):
+        for j in range(len(matrix_2)):
+            if (matrix_1[i][j]==matrix_2[i][j]).all() == True:
+                num_pixel_same += 1 
+
+    return num_pixel_same
 
 def fliplr_cont_score(matrix):
 
@@ -55,26 +57,55 @@ def rotate270_cont_score(matrix):
 
 def cont_symmetry_score(matrix):
 
-    score = {'ver_cont':0, 'hor_cont':0, \
-    'diag_pos_cont':0, 'diag_neg_cont':0, '90_degree_cont':0, \
-    '180_degree_cont':0, '270_degree_cont':0, 'ver+hor_cont':0, \
-    'diag_pos_cont+diag_neg_cont':0, 'ver+hor_cont+diag_pos_cont+diag_neg_cont':0, '90+180+270_cont':0, 'sym_cont total':0}
-
     mini_matrixs = return_all_mini_matrix(matrix)
 
+    ver_cont_temp = 0 
+    hor_cont_temp = 0 
+    diag_pos_cont_temp = 0 
+    diag_neg_cont_temp = 0 
+    ninety_degree_cont_temp = 0 
+    oneeighty_degree_cont_temp = 0 
+    twoseventy_degree_cont_temp = 0 
+    ver_and_hor_cont_temp = 0 
+    diag_pos_and_neg_cont_temp = 0 
+    ver_and_hor_diag_pos_and_neg_cont_temp = 0 
+    ninety_180_270_cont_temp = 0 
+    syn_cont_total_temp = 0
+
+
+    rejected_diag_pos_cont = [] 
     for mini_matrix in mini_matrixs:
-        score = {'ver_cont': score['ver_cont'] + fliplr_cont_score(mini_matrix), \
-                 'hor_cont': score['hor_cont'] + flipud_cont_score(mini_matrix), \
-                 'diag_pos_cont': score['diag_pos_cont'] + pos_diag_cont_score(mini_matrix), \
-                 'diag_neg_cont': score['diag_neg_cont'] + neg_diag_cont_score(mini_matrix), \
-                 '90_degree_cont': score['90_degree_cont'] + rotate90_cont_score(mini_matrix), \
-                 '180_degree_cont': score['180_degree_cont'] + rotate180_cont_score(mini_matrix), \
-                 '270_degree_cont': score['270_degree_cont'] + rotate270_cont_score(mini_matrix), \
-                 'ver+hor_cont': score['ver+hor_cont'] + score['ver_cont'] + score['hor_cont'], \
-                 'diag_pos_cont+diag_neg_cont': score['diag_pos_cont+diag_neg_cont'] + score['diag_pos_cont'] + score['diag_neg_cont'], \
-                 'ver+hor_cont+diag_pos_cont+diag_neg_cont': score['ver+hor_cont+diag_pos_cont+diag_neg_cont'] + score['ver+hor_cont'] + score['diag_pos_cont+diag_neg_cont'], \
-                 '90+180+270_cont': score['90+180+270_cont'] + score['90_degree_cont'] + score['180_degree_cont'] + score['270_degree_cont'], \
-                 'sym_cont total': score['sym_cont total'] + score['ver+hor_cont+diag_pos_cont+diag_neg_cont'] + score['90+180+270_cont']}
+        if pos_diag_cont_score(mini_matrix) == 0: 
+            rejected_diag_pos_cont.append(mini_matrix)
+        ver_cont_temp += fliplr_cont_score(mini_matrix)
+        hor_cont_temp += flipud_cont_score(mini_matrix)
+        diag_neg_cont_temp += neg_diag_cont_score(mini_matrix) 
+        diag_pos_cont_temp += pos_diag_cont_score(mini_matrix)
+        ninety_degree_cont_temp += rotate90_cont_score(mini_matrix)
+        oneeighty_degree_cont_temp += rotate180_cont_score(mini_matrix)
+        twoseventy_degree_cont_temp += rotate270_cont_score(mini_matrix)
+
+        ninety_180_270_cont_temp += ninety_degree_cont_temp + oneeighty_degree_cont_temp + twoseventy_degree_cont_temp
+        syn_cont_total_temp += ver_and_hor_diag_pos_and_neg_cont_temp + ninety_180_270_cont_temp 
+
+    print len(rejected_diag_pos_cont)
+    score = {'ver_cont':ver_cont_temp, \
+             'hor_cont':hor_cont_temp, \
+              'diag_pos_cont':diag_pos_cont_temp, \
+              'diag_neg_cont':diag_neg_cont_temp, \
+              '90_degree_cont':ninety_degree_cont_temp, \
+              '180_degree_cont':oneeighty_degree_cont_temp, \
+              '270_degree_cont':twoseventy_degree_cont_temp}
+
+    score['ver+hor_cont'] = score['ver_cont'] + score['hor_cont']
+
+    score['diag_pos_cont+diag_neg_cont'] = score['diag_pos_cont'] + score['diag_neg_cont']
+
+    score['ver+hor_cont+diag_pos_cont+diag_neg_cont'] = score['ver+hor_cont'] + score['diag_pos_cont+diag_neg_cont']
+               
+    score['90+180+270_cont'] = score['90_degree_cont'] + score['180_degree_cont'] + score['270_degree_cont']
+
+    score['sym_cont_total'] = score['ver+hor_cont+diag_pos_cont+diag_neg_cont'] + score['90+180+270_cont']
 
     return score 
 

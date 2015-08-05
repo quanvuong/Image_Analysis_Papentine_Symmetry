@@ -4,7 +4,7 @@ import math
 from helper_functions import *
 
 def sum_length_sublist(l):
-    "Return the sum length of the sublists of a list"
+    "Return the total length of the sublists of a list"
 
     length = 0
     for sublist in l:
@@ -63,17 +63,12 @@ def papentine_matrix(matrix):
 def adj_pixel_top_right(matrix, curr_row, curr_col):
 	'Return the pixel touching the current pixel at its top right corner'
 
-	try:
-		if curr_row-1 < 0: 
-			return 'error: out of bound at the top' 
-		elif curr_col+1 > 5:
-			return 'error: out of bound on the left'
-		else: 
-			return matrix[curr_row-1][curr_col+1]
-	except IndexError:
-		print curr_col
-		print curr_row
-		print matrix
+	if curr_row-1 < 0: 
+		return 'error: out of bound at the top' 
+	elif curr_col+2 > len(matrix[1]):
+		return 'error: out of bound on the right'
+	else: 
+		return matrix[curr_row-1][curr_col+1]
 
 def pos_diag_one_line(input_matrix, curr_row, curr_col):
 	'return the positive diag line of a matrix given the row and column of the first pixel'
@@ -83,7 +78,7 @@ def pos_diag_one_line(input_matrix, curr_row, curr_col):
 	output_line.append(input_matrix[curr_row][curr_col])
 
 	while adj_pixel_top_right(input_matrix, curr_row, curr_col) != 'error: out of bound at the top':
-		if adj_pixel_top_right(input_matrix, curr_row, curr_col) == 'error: out of bound on the left':
+		if adj_pixel_top_right(input_matrix, curr_row, curr_col) == 'error: out of bound on the right':
 			break 
 
 		output_line.append(adj_pixel_top_right(input_matrix, curr_row, curr_col))
@@ -138,16 +133,16 @@ def papentine(matrix):
 
 	score = {} 
 
-	score = {'papentine hor': papentine_hor(matrix), \
-			 'papentine ver': papentine_ver(matrix), \
-			 'papentine pos diag': papentine_pos_diag(matrix),\
-			 'papentine neg diag': papentine_neg_diag(matrix)}
+	score = {'papentine_hor': papentine_hor(matrix), \
+			 'papentine_ver': papentine_ver(matrix), \
+			 'papentine_pos_diag': papentine_pos_diag(matrix),\
+			 'papentine_neg_diag': papentine_neg_diag(matrix)}
 
 
-	score = {'papentine hor+ver': score['papentine pos diag'] + score['papentine neg diag'],\
-			 'papentine pos diag+neg diag': score['papentine pos diag'] + score['papentine neg diag']}
+	score = {'papentine_hor+ver': score['papentine_pos_diag'] + score['papentine_neg_diag'],\
+			 'papentine_pos_diag+neg_diag': score['papentine_pos_diag'] + score['papentine_neg_diag']}
 
-	score = {'papentine Total': score['papentine hor+ver'] + score['papentine pos diag+neg diag']
+	score = {'papentine_total': score['papentine_hor+ver'] + score['papentine_pos_diag+neg_diag']
 				 }
 
  	return score 

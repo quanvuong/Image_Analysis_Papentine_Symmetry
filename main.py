@@ -86,30 +86,28 @@ if __name__ == '__main__':
 
 	picture_names = sort_picture(picture_names)
 
-	print picture_names
-
 	if '.DS_Store' in picture_names: picture_names.remove('.DS_Store')
 
-	for picture in picture_names:
-		image_matrix = convert_image(os.getcwd() + '/' + folder_name + '/' + picture)
-
-		cont_sym_score = cont_symmetry_score(image_matrix)
-		dist_sym_score = dist_symmetry_score(image_matrix)
-		papentine_score = papentine(image_matrix)
-
-		cont_and_dist_sym_score = merge_dict(cont_sym_score, dist_sym_score)
-
-		image_score[picture] = merge_dict(cont_and_dist_sym_score, papentine_score)
-		print "done with " + picture
-
-	pprint(image_score)
-
 	# for picture in picture_names:
+	# 	image_matrix = convert_image(os.getcwd() + '/' + folder_name + '/' + picture)
 
-	# 	if picture == 'p1.png':
-	# 		im = convert_image(os.getcwd() + '/' + folder_name + '/' + picture)
+	# 	cont_sym_score = cont_symmetry_score(image_matrix)
+	# 	dist_sym_score = dist_symmetry_score(image_matrix)
+	# 	papentine_score = papentine(image_matrix)
 
-	# 		dist_symmetry_score(im)
+	# 	cont_and_dist_sym_score = merge_dict(cont_sym_score, dist_sym_score)
+
+	# 	image_score[picture] = merge_dict(cont_and_dist_sym_score, papentine_score)
+	# 	print "done with " + picture
+
+	# pprint(image_score)
+
+	for picture in picture_names:
+
+		if picture == 'p1.png':
+			im = convert_image(os.getcwd() + '/' + folder_name + '/' + picture)
+
+			print dist_symmetry_score(im)
 
 	# create_empty_table(folder_name)
 

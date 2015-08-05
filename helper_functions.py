@@ -122,6 +122,18 @@ def reflect_neg_diag(matrix):
 
     return matrix 
 
+def sort_list_by_length_sublist(mother_list):
+    'Sort the content of a list by the length of the sublist in ascending order'
+
+    state = True
+
+    while state != True:
+        state = False
+        for i in range(len(mother_list)-1):
+            if len(mother_list[i]) > len(mother_list[i+1]): 
+                mother_list[i], mother_list[i+1] = mother_list[i+1], mother_list[i]
+                state = True
+
 if __name__ == '__main__':
     pass 
 

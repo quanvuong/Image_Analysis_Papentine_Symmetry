@@ -72,8 +72,6 @@ def cont_symmetry_score(matrix):
     ninety_180_270_cont_temp = 0 
     syn_cont_total_temp = 0
 
-
-    rejected_diag_pos_cont = [] 
     for mini_matrix in mini_matrixs:
         if pos_diag_cont_score(mini_matrix) == 0: 
             rejected_diag_pos_cont.append(mini_matrix)
@@ -88,7 +86,6 @@ def cont_symmetry_score(matrix):
         ninety_180_270_cont_temp += ninety_degree_cont_temp + oneeighty_degree_cont_temp + twoseventy_degree_cont_temp
         syn_cont_total_temp += ver_and_hor_diag_pos_and_neg_cont_temp + ninety_180_270_cont_temp 
 
-    print len(rejected_diag_pos_cont)
     score = {'ver_cont':ver_cont_temp, \
              'hor_cont':hor_cont_temp, \
               'diag_pos_cont':diag_pos_cont_temp, \

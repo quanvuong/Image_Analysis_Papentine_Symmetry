@@ -77,7 +77,7 @@ def merge_dict(dict_1, dict_2):
 if __name__ == '__main__':
 
 	#The folder in which the images are in 
-	folder_name = '6_by_6'
+	folder_name = 'Chipman patterns'
 
 	#image_score contains the scores of all images
 	image_score = {}  

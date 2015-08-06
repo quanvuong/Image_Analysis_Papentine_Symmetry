@@ -1,11 +1,16 @@
-import xlsxwriter 
-from papentine import *
-from symcal_continuous import *
-from symcal_discrete import * 
-from helper_functions import * 
-from PIL import Image 
+import sys
 import os 
-from pprint import pprint 
+
+sys.path.insert(0, os.getcwd() + '/codes')
+
+import xlsxwriter 
+import papentine  
+import sym_cont
+import sym_dist
+import helpers 
+from PIL import Image 
+import numpy as np 
+import pprint 
 
 def sort_picture(picture_names):
 
@@ -88,37 +93,37 @@ if __name__ == '__main__':
 
 	if '.DS_Store' in picture_names: picture_names.remove('.DS_Store')
 
-	# for picture in picture_names:
-	# 	image_matrix = convert_image(os.getcwd() + '/' + folder_name + '/' + picture)
+	for picture in picture_names:
+		image_matrix = convert_image(os.getcwd() + '/' + folder_name + '/' + picture)
 
-	# 	cont_sym_score = cont_symmetry_score(image_matrix)
-	# 	dist_sym_score = dist_symmetry_score(image_matrix)
-	# 	papentine_score = papentine(image_matrix)
+		cont_sym_score = sym_cont.cont_symmetry_score(image_matrix)
+		dist_sym_score = sym_dist.dist_symmetry_score(image_matrix)
+		papentine_score = papentine.papentine(image_matrix)
 
-	# 	cont_and_dist_sym_score = merge_dict(cont_sym_score, dist_sym_score)
+		cont_and_dist_sym_score = merge_dict(cont_sym_score, dist_sym_score)
 
-	# 	image_score[picture] = merge_dict(cont_and_dist_sym_score, papentine_score)
-	# 	print "done with " + picture
+		image_score[picture] = merge_dict(cont_and_dist_sym_score, papentine_score)
+		print "done with " + picture
 
-	# pprint(image_score)
+	pprint.pprint(image_score)
 
 	# The commentted part below is for debugging 
-	for picture in picture_names:
+	# for picture in picture_names:
 
-		if picture == 'p1.png':
-			im = convert_image(os.getcwd() + '/' + folder_name + '/' + picture)
+	# 	if picture == 'p1.png':
+	# 		im = convert_image(os.getcwd() + '/' + folder_name + '/' + picture)
 
-			print papentine(im)
+	# 		print papentine.papentine(im)
 
-		if picture == 'p2.png':
-			im = convert_image(os.getcwd() + '/' + folder_name + '/' + picture)
+	# 	if picture == 'p2.png':
+	# 		im = convert_image(os.getcwd() + '/' + folder_name + '/' + picture)
 
-			print papentine(im)
+	# 		print papentine.papentine(im)
 
-		if picture == 'p3.png':
-			im = convert_image(os.getcwd() + '/' + folder_name + '/' + picture)
+	# 	if picture == 'p3.png':
+	# 		im = convert_image(os.getcwd() + '/' + folder_name + '/' + picture)
 
-			print papentine(im)
+	# 		print papentine.papentine(im)
 
 
 

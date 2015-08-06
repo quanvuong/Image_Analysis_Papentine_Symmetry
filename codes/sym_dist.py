@@ -1,6 +1,6 @@
 import copy
-import  numpy as np
-from helper_functions import * 
+import numpy as np
+import helpers 
 
 def compare_two_matrix_dist(matrix_1, matrix_2):
     "If two matrix is the same, return 1 if they are the same, if not, return 0"
@@ -23,37 +23,37 @@ def flipud_dist_score(matrix):
 
 def pos_diag_dist_score(matrix):
 
-    flipped_matrix = reflect_pos_diag(matrix)
+    flipped_matrix = helpers.reflect_pos_diag(matrix)
 
     return compare_two_matrix_dist(matrix, flipped_matrix)
 
 def neg_diag_dist_score(matrix):
 
-    flipped_matrix = reflect_neg_diag(matrix)
+    flipped_matrix = helpers.reflect_neg_diag(matrix)
 
     return compare_two_matrix_dist(matrix, flipped_matrix)
 
 def rotate90_dist_score(matrix):
 
-    rotated_matrix = rotate90(matrix)
+    rotated_matrix = helpers.rotate90(matrix)
 
     return compare_two_matrix_dist(matrix, rotated_matrix)
 
 def rotate180_dist_score(matrix):
 
-    rotated_matrix = rotate180(matrix)
+    rotated_matrix = helpers.rotate180(matrix)
 
     return compare_two_matrix_dist(matrix, rotated_matrix)
 
 def rotate270_dist_score(matrix):
 
-    rotated_matrix = rotate270(matrix)
+    rotated_matrix = helpers.rotate270(matrix)
 
     return compare_two_matrix_dist(matrix, rotated_matrix)
 
 def dist_symmetry_score(matrix):
 
-    mini_matrixs = return_all_mini_matrix(matrix)
+    mini_matrixs = helpers.return_all_mini_matrix(matrix)
 
     ver_dist_temp = 0 
     hor_dist_temp = 0 

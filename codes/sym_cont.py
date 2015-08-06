@@ -1,6 +1,6 @@
 import copy
 import numpy as np
-from helper_functions import * 
+import helpers
 
 def compare_two_matrix_cont(matrix_1, matrix_2):
     "Return the number of pixels in two matrixes that are the same"
@@ -27,37 +27,37 @@ def flipud_cont_score(matrix):
 
 def pos_diag_cont_score(matrix):
 
-    flipped_matrix = reflect_pos_diag(matrix)
+    flipped_matrix = helpers.reflect_pos_diag(matrix)
 
     return compare_two_matrix_cont(matrix, flipped_matrix)
 
 def neg_diag_cont_score(matrix):
 
-    flipped_matrix = reflect_neg_diag(matrix)
+    flipped_matrix = helpers.reflect_neg_diag(matrix)
 
     return compare_two_matrix_cont(matrix, flipped_matrix)
 
 def rotate90_cont_score(matrix):
 
-    rotated_matrix = rotate90(matrix)
+    rotated_matrix = helpers.rotate90(matrix)
 
     return compare_two_matrix_cont(matrix, rotated_matrix)
 
 def rotate180_cont_score(matrix):
 
-    rotated_matrix = rotate180(matrix)
+    rotated_matrix = helpers.rotate180(matrix)
 
     return compare_two_matrix_cont(matrix, rotated_matrix)
 
 def rotate270_cont_score(matrix):
 
-    rotated_matrix = rotate270(matrix)
+    rotated_matrix = helpers.rotate270(matrix)
 
     return compare_two_matrix_cont(matrix, rotated_matrix)
 
 def cont_symmetry_score(matrix):
 
-    mini_matrixs = return_all_mini_matrix(matrix)
+    mini_matrixs = helpers.return_all_mini_matrix(matrix)
 
     ver_cont_temp = 0 
     hor_cont_temp = 0 

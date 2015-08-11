@@ -32,7 +32,7 @@ def sort_picture(picture_names):
 
 	return picture_names
 
-def create_empty_table(folder_namem, columns):
+def create_excel_table(folder_namem, columns):
 
 	workbook = xlsxwriter.Workbook('Image Analysis.xlsx')
 	worksheet = workbook.add_worksheet()

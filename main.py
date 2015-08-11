@@ -32,33 +32,6 @@ def sort_picture(picture_names):
 
 	return picture_names
 
-def create_excel_table(folder_namem, columns):
-
-	workbook = xlsxwriter.Workbook('Image Analysis.xlsx')
-	worksheet = workbook.add_worksheet()
-
-	#Creating the colums 
-	row = 0 
-	col = 0 
-
-	for column in columns:
-		worksheet.write(row, col, column)
-		col += 1 
-
-	col = 0
-	row = 1 
-
-	#Get the names of the images and sort the name in ascending order" 
-	picture_names = [picture for picture in os.listdir(folder_name)]
-
-	picture_names = sort_picture(picture_names)
-
-	for picture in picture_names:
-		worksheet.write(row, col, picture)
-		row += 1 
-
-	workbook.close() 
-
 def convert_image(image_name):
 	'Convert image into numpy matrix'
 
@@ -67,7 +40,7 @@ def convert_image(image_name):
 	im_converted = np.array(im_converted).tolist()
 	return im_converted
 
-def merge_dict(dict_1, dict_2):
+def merge_two_dict(dict_1, dict_2):
 	'Merge dict_1 and dict_2. Two dicts must not have overlapping key'
 
 	temp_dict = {} 
@@ -79,33 +52,74 @@ def merge_dict(dict_1, dict_2):
 
 	return temp_dict
 
-if __name__ == '__main__':
+def go_dir(picture, folder_name):
+	'Return the directory of a picture'
 
-	#The folder in which the images are in 
-	folder_name = 'Chipman patterns'
+	return os.getcwd() + '/' + folder_name + '/' + picture
 
-	#image_score contains the scores of all images
-	image_score = {}  
+def merge_three_dict(dict_1, dict_2, dict_3):
+
+	temp_dict = merge_two_dict(dict_1, dict_2)
+
+	return merge_two_dict(temp_dict, dict_3)
+
+def get_image_names(folder_name):
+	'return the sorted images name'
 
 	picture_names = [picture for picture in os.listdir(folder_name)]
 
 	picture_names = sort_picture(picture_names)
 
+	return picture_names
+
+if __name__ == '__main__':
+
+	#The folder in which the images are in 
+	folder_name = 'Chipman patterns'
+	#Excel file name 
+	excel_file_name = 'Image Analysis.xlsx'
+
+	#image_score contains the scores of all images
+	image_score = {}  
+
+	picture_names = get_image_names(folder_name)
+
 	if '.DS_Store' in picture_names: picture_names.remove('.DS_Store')
 
 	for picture in picture_names:
-		image_matrix = convert_image(os.getcwd() + '/' + folder_name + '/' + picture)
+		image_matrix = convert_image(go_dir(picture, folder_name))
 
 		cont_sym_score = sym_cont.cont_symmetry_score(image_matrix)
 		dist_sym_score = sym_dist.dist_symmetry_score(image_matrix)
 		papentine_score = papentine.papentine(image_matrix)
 
-		cont_and_dist_sym_score = merge_dict(cont_sym_score, dist_sym_score)
+		image_score[picture] = merge_three_dict(cont_sym_score, dist_sym_score, papentine_score)
 
-		image_score[picture] = merge_dict(cont_and_dist_sym_score, papentine_score)
-		print "done with " + picture
+	#writing data onto an excel file
+	workbook = xlsxwriter.Workbook(excel_file_name)
+	worksheet = workbook.add_worksheet()
 
-	pprint.pprint(image_score)
+	columns = sorted(image_score['p1.png'])
+
+	col = 0 
+	row = 0 
+	for column in columns:
+		col += 1 
+
+		worksheet.write(row, col, column)
+
+	col = 0 
+	row = 0 
+
+	for picture in picture_names:
+		col = 0 
+		row += 1 
+		worksheet.write(row, col, picture)
+		for column in columns: 
+			col += 1 
+			worksheet.write(row, col, image_score[picture][column])
+
+	workbook.close()
 
 	# The commentted part below is for debugging 
 	# for picture in picture_names:

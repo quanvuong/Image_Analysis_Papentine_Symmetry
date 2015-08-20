@@ -77,7 +77,7 @@ if __name__ == '__main__':
 	#The folder in which the images are in 
 	folder_name = 'Chipman patterns'
 	#Excel file name 
-	excel_file_name = 'Image Analysis.xlsx'
+	excel_file_name = 'Chipman Image Analysis.xlsx'
 
 	#image_score contains the scores of all images
 	image_score = {}  

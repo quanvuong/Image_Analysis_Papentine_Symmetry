@@ -9,6 +9,7 @@ def sum_length_sublist(l):
     length = 0
     for sublist in l:
         length = length + len(sublist)
+
     return length
 
 def image_into_matrix(image):
@@ -23,17 +24,15 @@ def papentine_split(sequence):
 
 	split_sublist = [] #split_sublist contains sublist of a list. The split_sublist is made whenever two consecutive symbols are different 
 
-	count = sequence[0]
+	length_split_sublist = 0	
 
-	length_sublist = 0 
+	for i in range(len(sequence) - 1):
+		if np.array_equal(sequence[i], sequence[i+1]) == False:
+			split_sublist.append(sequence[length_split_sublist: (i+1)])
 
-	for i in range(len(sequence)-1):
-	    length_sublist = sum_length_sublist(split_sublist)
-	    if np.array_equal(sequence[i], sequence[i+1]):
-	        split_sublist.append(sequence[length_sublist:i+1])
-	        length_sublist = length_sublist + len(split_sublist[len(split_sublist)-1])
+			length_split_sublist += len(split_sublist[-1])
 
-	split_sublist.append(sequence[length_sublist:len(sequence)])
+	split_sublist.append(sequence[length_split_sublist: (len(sequence) + 1)])
 
 	return split_sublist
 
@@ -43,10 +42,10 @@ def papentine_one_seq(sequence): #Calculate L1 length of 1 sequence
 
 	split_sublist = papentine_split(sequence)
 
-	score = len(split_sublist)
+	score += len(split_sublist)
 
 	for i in range(len(split_sublist)):
-	    score = score + math.log(len(split_sublist[i]),10)
+	    score += math.log(len(split_sublist[i]),10)
 
 	return score
 
@@ -119,12 +118,16 @@ def papentine_pos_diag(matrix):
 
 	matrix = pos_diag_into_matrix(matrix)
 
+	del matrix[-1]
+
 	return papentine_matrix(matrix) 
 
 def papentine_neg_diag(matrix):
 
 	matrix = rotate90(matrix)
 	matrix = pos_diag_into_matrix(matrix)
+
+	del matrix[-1]
 
 	return papentine_matrix(matrix)
 
@@ -138,12 +141,11 @@ def papentine(matrix):
 			 'papentine_pos_diag': papentine_pos_diag(matrix),\
 			 'papentine_neg_diag': papentine_neg_diag(matrix)}
 
+	score['papentine_hor+ver'] = score['papentine_hor'] + score['papentine_ver']
 
-	score = {'papentine_hor+ver': score['papentine_pos_diag'] + score['papentine_neg_diag'],\
-			 'papentine_pos_diag+neg_diag': score['papentine_pos_diag'] + score['papentine_neg_diag']}
+	score['papentine_pos_diag+neg_diag'] = score['papentine_pos_diag'] + score['papentine_neg_diag']
 
-	score = {'papentine_total': score['papentine_hor+ver'] + score['papentine_pos_diag+neg_diag']
-				 }
+	score['papentine_total'] = score['papentine_hor+ver'] + score['papentine_pos_diag+neg_diag']
 
  	return score 
 

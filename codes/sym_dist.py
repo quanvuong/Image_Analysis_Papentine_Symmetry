@@ -1,10 +1,10 @@
 import copy
 import numpy as np
-import helpers 
+import helpers
 
 def compare_two_matrix_dist(matrix_1, matrix_2):
     "If two matrix is the same, return 1 if they are the same, if not, return 0"
-    if np.array_equal(matrix_1 ,matrix_2) == True: 
+    if np.array_equal(matrix_1, matrix_2) == True:
         return 1 
     else: 
         return 0 

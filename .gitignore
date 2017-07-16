@@ -154,3 +154,4 @@ local.properties
 
 .gitignore
 .idea/workspace.xml
+.idea

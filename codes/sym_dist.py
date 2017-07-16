@@ -80,23 +80,25 @@ def dist_symmetry_score(matrix):
         ninety_180_270_dist_temp += ninety_degree_dist_temp + oneeighty_degree_dist_temp + twoseventy_degree_dist_temp
         syn_dist_total_temp += ver_and_hor_diag_pos_and_neg_dist_temp + ninety_180_270_dist_temp 
 
-    score = {'ver_dist':ver_dist_temp, \
-             'hor_dist':hor_dist_temp, \
-              'diag_pos_dist':diag_pos_dist_temp, \
-              'diag_neg_dist':diag_neg_dist_temp, \
-              '90_degree_dist':ninety_degree_dist_temp, \
-              '180_degree_dist':oneeighty_degree_dist_temp, \
-              '270_degree_dist':twoseventy_degree_dist_temp}
+    score = {'Discrete Left Right':ver_dist_temp, \
+             'Discrete Up Down':hor_dist_temp, \
+              'Discrete NW-SE':diag_pos_dist_temp, \
+              'Discrete NE-SW':diag_neg_dist_temp, \
+              'Discrete 90 degree':ninety_degree_dist_temp, \
+              'Discrete 180 degree':oneeighty_degree_dist_temp, \
+              'Discrete 270 degree':twoseventy_degree_dist_temp}
 
-    score['ver+hor_dist'] = score['ver_dist'] + score['hor_dist']
+    score['Discrete Left Right + Up Down'] = score['Discrete Left Right'] + score['Discrete Up Down']
 
-    score['diag_pos_dist+diag_neg_dist'] = score['diag_pos_dist'] + score['diag_neg_dist']
+    score['Discrete NW-SE + NE-SW'] = score['Discrete NW-SE'] + score['Discrete NE-SW']
 
-    score['ver+hor_dist+diag_pos_dist+diag_neg_dist'] = score['ver+hor_dist'] + score['diag_pos_dist+diag_neg_dist']
+    score['Discrete Left Right + Up Down + NW-SE + NE-SW'] = score['Discrete Left Right + Up Down'] \
+                                                               + score['Discrete NW-SE + NE-SW']
                
-    score['90+180+270_dist'] = score['90_degree_dist'] + score['180_degree_dist'] + score['270_degree_dist']
+    score['Discrete 90 + 180 + 270'] = score['Discrete 90 degree'] \
+                                         + score['Discrete 180 degree'] + score['Discrete 270 degree']
 
-    score['sym_dist_total'] = score['ver+hor_dist+diag_pos_dist+diag_neg_dist'] + score['90+180+270_dist']
+    score['Discrete Total'] = score['Discrete Left Right + Up Down + NW-SE + NE-SW'] + score['Discrete 90 + 180 + 270']
 
     return score 
 

@@ -1,6 +1,7 @@
 import copy
 import numpy as np
 import helpers
+from pprint import pprint
 
 def compare_two_matrix_cont(matrix_1, matrix_2):
     "Return the number of pixels in two matrixes that are the same"
@@ -73,8 +74,8 @@ def cont_symmetry_score(matrix):
     syn_cont_total_temp = 0
 
     for mini_matrix in mini_matrixs:
-        if pos_diag_cont_score(mini_matrix) == 0: 
-            rejected_diag_pos_cont.append(mini_matrix)
+        # if pos_diag_cont_score(mini_matrix) == 0:
+        #     rejected_diag_pos_cont.append(mini_matrix)
         ver_cont_temp += fliplr_cont_score(mini_matrix)
         hor_cont_temp += flipud_cont_score(mini_matrix)
         diag_neg_cont_temp += neg_diag_cont_score(mini_matrix) 
@@ -86,23 +87,26 @@ def cont_symmetry_score(matrix):
         ninety_180_270_cont_temp += ninety_degree_cont_temp + oneeighty_degree_cont_temp + twoseventy_degree_cont_temp
         syn_cont_total_temp += ver_and_hor_diag_pos_and_neg_cont_temp + ninety_180_270_cont_temp 
 
-    score = {'ver_cont':ver_cont_temp, \
-             'hor_cont':hor_cont_temp, \
-              'diag_pos_cont':diag_pos_cont_temp, \
-              'diag_neg_cont':diag_neg_cont_temp, \
-              '90_degree_cont':ninety_degree_cont_temp, \
-              '180_degree_cont':oneeighty_degree_cont_temp, \
-              '270_degree_cont':twoseventy_degree_cont_temp}
+    score = {'Continuous Left Right':ver_cont_temp, \
+             'Continuous Up Down':hor_cont_temp, \
+              'Continuous NW-SE':diag_pos_cont_temp, \
+              'Continuous NE-SW':diag_neg_cont_temp, \
+              'Continuous 90 degree':ninety_degree_cont_temp, \
+              'Continuous 180 degree':oneeighty_degree_cont_temp, \
+              'Continuous 270 degree':twoseventy_degree_cont_temp}
 
-    score['ver+hor_cont'] = score['ver_cont'] + score['hor_cont']
+    score['Continuous Left Right + Up Down'] = score['Continuous Left Right'] + score['Continuous Up Down']
 
-    score['diag_pos_cont+diag_neg_cont'] = score['diag_pos_cont'] + score['diag_neg_cont']
+    score['Continuous NW-SE + NE-SW'] = score['Continuous NW-SE'] + score['Continuous NE-SW']
 
-    score['ver+hor_cont+diag_pos_cont+diag_neg_cont'] = score['ver+hor_cont'] + score['diag_pos_cont+diag_neg_cont']
+    score['Continuous Left Right + Up Down + NW-SE + NE-SW'] \
+        = score['Continuous Left Right + Up Down'] + score['Continuous NW-SE + NE-SW']
                
-    score['90+180+270_cont'] = score['90_degree_cont'] + score['180_degree_cont'] + score['270_degree_cont']
+    score['Continuous 90 + 180 + 270'] = score['Continuous 90 degree'] \
+                                         + score['Continuous 180 degree'] + score['Continuous 270 degree']
 
-    score['sym_cont_total'] = score['ver+hor_cont+diag_pos_cont+diag_neg_cont'] + score['90+180+270_cont']
+    score['Continuous Total'] = score['Continuous Left Right + Up Down + NW-SE + NE-SW'] \
+                                + score['Continuous 90 + 180 + 270']
 
     return score 
 

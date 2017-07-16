@@ -1,16 +1,64 @@
 import sys
 import os
 
-sys.path.insert(0, os.getcwd() + '/codes')
-
 import xlsxwriter
-import papentine
-import sym_cont
-import sym_dist
-import helpers
+from codes import papentine
+from codes import sym_cont
+from codes import sym_dist
+from codes import helpers
 from PIL import Image
 import numpy as np
+from scipy.stats import spearmanr
 import pprint
+
+
+chipman_human_scores = [
+    0.4,
+    15.7,
+    38.8,
+    5.6,
+    25.1,
+    16,
+    9.7,
+    7,
+    1.4,
+    4,
+    3.5,
+    22.2,
+    0.7,
+    12.1,
+    20.9,
+    36.7,
+    31.9,
+    36.2,
+    44.9,
+    32.4,
+    29.2,
+    34.3,
+    23,
+    33.8,
+    33.2,
+    29.2,
+    29.4,
+    33.1,
+    34.3,
+    36.2,
+    22.2,
+    5.3,
+    2.8,
+    10,
+    9,
+    10.2,
+    7.2,
+    6,
+    2.2,
+    8.1,
+    7.4,
+    5.7,
+    30.5,
+    12.1,
+    18,
+]
 
 
 def sort_picture(picture_names):
@@ -89,11 +137,8 @@ if __name__ == '__main__':
 
     picture_names = get_image_names(folder_name)
 
-    if '.DS_Store' in picture_names: picture_names.remove('.DS_Store')
-
     for picture in picture_names:
         image_matrix = convert_image(go_dir(picture, folder_name))
-
         cont_sym_score = sym_cont.cont_symmetry_score(image_matrix)
         dist_sym_score = sym_dist.dist_symmetry_score(image_matrix)
         papentine_score = papentine.papentine(image_matrix)
@@ -123,6 +168,23 @@ if __name__ == '__main__':
         for column in columns:
             col += 1
             worksheet.write(row, col, image_score[picture][column])
+
+    # Write spearman values
+    worksheet.write(row + 1, 0, 'Spearman rho')
+    worksheet.write(row + 2, 0, 'Spearman p value')
+
+    col = 1
+    for column in columns:
+        scores = []
+        for pic in picture_names:
+            scores.append(image_score[pic][column])
+        rho, p_value = spearmanr(chipman_human_scores, scores)
+        rho = round(rho, 3)
+        p_value = round(p_value, 3)
+        worksheet.write(row + 1, col, str(rho))
+        worksheet.write(row + 2, col, str(p_value))
+
+        col += 1
 
     workbook.close()
 

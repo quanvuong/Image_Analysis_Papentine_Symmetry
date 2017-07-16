@@ -1,7 +1,8 @@
 import os 
 import numpy as np 
 import math 
-from helper_functions import *
+from helpers import *
+from PIL import Image
 
 def sum_length_sublist(l):
     "Return the total length of the sublists of a list"
@@ -79,7 +80,6 @@ def pos_diag_one_line(input_matrix, curr_row, curr_col):
 	while adj_pixel_top_right(input_matrix, curr_row, curr_col) != 'error: out of bound at the top':
 		if adj_pixel_top_right(input_matrix, curr_row, curr_col) == 'error: out of bound on the right':
 			break 
-
 		output_line.append(adj_pixel_top_right(input_matrix, curr_row, curr_col))
 		curr_row -= 1 
 		curr_col += 1
@@ -136,16 +136,16 @@ def papentine(matrix):
 
 	score = {} 
 
-	score = {'papentine_hor': papentine_hor(matrix), \
-			 'papentine_ver': papentine_ver(matrix), \
-			 'papentine_pos_diag': papentine_pos_diag(matrix),\
-			 'papentine_neg_diag': papentine_neg_diag(matrix)}
+	score = {'papentine horizontal': papentine_hor(matrix), \
+			 'papentine vertical': papentine_ver(matrix), \
+			 'papentine positive diagonal': papentine_pos_diag(matrix),\
+			 'papentine negative diagonal': papentine_neg_diag(matrix)}
 
-	score['papentine_hor+ver'] = score['papentine_hor'] + score['papentine_ver']
+	score['papentine horizontal + vertical'] = score['papentine horizontal'] + score['papentine vertical']
 
-	score['papentine_pos_diag+neg_diag'] = score['papentine_pos_diag'] + score['papentine_neg_diag']
+	score['papentine positive + negative diagonal'] = score['papentine positive diagonal'] + score['papentine negative diagonal']
 
-	score['papentine_total'] = score['papentine_hor+ver'] + score['papentine_pos_diag+neg_diag']
+	score['papentine total'] = score['papentine horizontal + vertical'] + score['papentine positive + negative diagonal']
 
  	return score 
 

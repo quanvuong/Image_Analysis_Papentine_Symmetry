@@ -1,5 +1,6 @@
 #!/bin/bash -l
 #SBATCH --job-name=image_analysis
+#SBATCH --output=output.slurm
 
 #SBATCH --time=00
 #SBATCH --cpus-per-task=1
@@ -12,8 +13,10 @@
 
 source activate image_complexity
 cd /gpfsnyu/home/qhv200/Image_Analysis_Papentine_Symmetry
-python main.py
 git pull
+python main.py
+ssh qhv200@login2
+cd /gpfsnyu/home/qhv200/Image_Analysis_Papentine_Symmetry
 git add -A
 git commit -m 'Add -A after python file finishes running'
 git push origin

@@ -137,7 +137,7 @@ if __name__ == '__main__':
     # excel_file_name = 'Chipman Image Analysis.xlsx'
 
     # Chinese data
-    folder_name = 'Chinese\ Characters/Chinese\ Compressed'
+    folder_name = 'Chinese Characters/Chinese Compressed'
     excel_file_name = 'Chinese Compressed Character Image Analysis.xlsx'
 
     # image_score contains the scores of all images

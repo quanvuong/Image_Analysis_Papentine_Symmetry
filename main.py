@@ -64,6 +64,8 @@ chinese_human_scores = [
     i for i in range(15)
 ]
 
+human_scores = chipman_human_scores
+
 
 def sort_picture(picture_names):
     change = False
@@ -132,13 +134,13 @@ def get_image_names(folder_name):
 if __name__ == '__main__':
 
     # The folder in which the images are in
-    # folder_name = 'Chipman patterns'
+    folder_name = 'Chipman patterns'
     # Excel file name
-    # excel_file_name = 'Chipman Image Analysis.xlsx'
+    excel_file_name = 'Chipman Image Analysis.xlsx'
 
     # Chinese data
-    folder_name = 'Chinese Characters/Chinese Compressed'
-    excel_file_name = 'Chinese Compressed Character Image Analysis.xlsx'
+    # folder_name = 'Chinese Characters/Chinese Compressed'
+    # excel_file_name = 'Chinese Compressed Character Image Analysis.xlsx'
 
     # image_score contains the scores of all images
     image_score = {}
@@ -158,9 +160,11 @@ if __name__ == '__main__':
     workbook = xlsxwriter.Workbook(excel_file_name)
     worksheet = workbook.add_worksheet()
 
+    # This is so that this line works with both chinese and chipman patterns
+    # Example of hard-coded value below
     # columns = sorted(image_score['p1.png'])
-
-    columns = sorted(image_score['Layer\ 1.png'])
+    # columns = sorted(image_score['Layer\ 1.png'])
+    columns = sorted(image_score[image_score.keys()[0]])
 
     col = 0
     row = 0
@@ -189,7 +193,7 @@ if __name__ == '__main__':
         scores = []
         for pic in picture_names:
             scores.append(image_score[pic][column])
-        rho, p_value = spearmanr(chinese_human_scores, scores)
+        rho, p_value = spearmanr(human_scores, scores)
         rho = round(rho, 3)
         p_value = round(p_value, 3)
         worksheet.write(row + 1, col, str(rho))

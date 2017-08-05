@@ -79,18 +79,21 @@ def return_all_mini_matrix(matrix):
 
     size = len(matrix)
 
-    mini_matrixs = []
-
     while size > 1:
-        mini_matrixs.append(all_mini_matrix_specific_size(matrix, size))
+        curr_row = 0
+
+        while (curr_row + size) <= len(matrix):
+
+            curr_col = 0
+
+            while (curr_col + size) <= len(matrix[0]):
+                yield get_mini_matrix(matrix, curr_col, curr_row, size)
+                curr_col += 1
+
+            curr_row += 1
+
         size -= 1
 
-    mini_matrixs = merge_sublist(mini_matrixs)
-
-    for i in range(len(mini_matrixs)):
-        mini_matrixs[i] = np.array(mini_matrixs[i])
-
-    return mini_matrixs  
 
 def num_pixel_matrix(matrix):
     "Return the number of pixel in an image"

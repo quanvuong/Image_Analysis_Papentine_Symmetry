@@ -1,5 +1,6 @@
 #!/bin/bash -l
 #SBATCH --job-name=image_analysis
+#SBATCH --output=output.slurm
 
 #SBATCH --time=00
 #SBATCH --cpus-per-task=1

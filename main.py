@@ -151,6 +151,7 @@ if __name__ == '__main__':
         dist_sym_score = sym_dist.dist_symmetry_score(image_matrix)
         papentine_score = papentine.papentine(image_matrix)
 
+        print('Finish processing for picture', picture)
         image_score[picture] = merge_three_dict(cont_sym_score, dist_sym_score, papentine_score)
 
     # writing data onto an excel file

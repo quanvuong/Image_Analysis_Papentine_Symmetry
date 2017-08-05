@@ -12,3 +12,11 @@ fatal: Could not read from remote repository.
 
 Please make sure you have the correct access rights
 and the repository exists.
+[master dc72eed] Add -A after python file finishes running
+ 1 file changed, 14 insertions(+)
+ create mode 100644 slurm-49995.out
+ssh: connect to host github.com port 22: Network is unreachable
+fatal: Could not read from remote repository.
+
+Please make sure you have the correct access rights
+and the repository exists.

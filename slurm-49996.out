@@ -1,0 +1,7 @@
+Using anaconda environment pytorch_cpu_py36
+/gpfsnyu/home/qhv200/Image_Analysis_Papentine_Symmetry/codes/papentine.py:80: FutureWarning: elementwise comparison failed; returning scalar instead, but in the future will perform elementwise comparison
+  while adj_pixel_top_right(input_matrix, curr_row, curr_col) != 'error: out of bound at the top':
+/gpfsnyu/home/qhv200/Image_Analysis_Papentine_Symmetry/codes/papentine.py:81: FutureWarning: elementwise comparison failed; returning scalar instead, but in the future will perform elementwise comparison
+  if adj_pixel_top_right(input_matrix, curr_row, curr_col) == 'error: out of bound on the right':
+ssh: connect to host github.com port 22: Network is unreachable
+fatal: The remote end hung up unexpectedly

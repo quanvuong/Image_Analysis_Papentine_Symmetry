@@ -128,9 +128,13 @@ def get_image_names(folder_name):
 if __name__ == '__main__':
 
     # The folder in which the images are in
-    folder_name = 'Chipman patterns'
+    # folder_name = 'Chipman patterns'
     # Excel file name
-    excel_file_name = 'Chipman Image Analysis.xlsx'
+    # excel_file_name = 'Chipman Image Analysis.xlsx'
+
+    # Chinese data
+    folder_name = 'Chinese\ Characters/Chinese\ Compressed'
+    excel_file_name = 'Chinese Compressed Character Image Analysis.xlsx'
 
     # image_score contains the scores of all images
     image_score = {}
@@ -149,7 +153,9 @@ if __name__ == '__main__':
     workbook = xlsxwriter.Workbook(excel_file_name)
     worksheet = workbook.add_worksheet()
 
-    columns = sorted(image_score['p1.png'])
+    # columns = sorted(image_score['p1.png'])
+
+    columns = sorted(image_score['Layer\ 1.png'])
 
     col = 0
     row = 0

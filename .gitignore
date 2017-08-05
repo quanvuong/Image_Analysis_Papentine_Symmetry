@@ -152,6 +152,4 @@ local.properties
 .scala_dependencies
 .worksheet
 
-.gitignore
-.idea/workspace.xml
 .idea

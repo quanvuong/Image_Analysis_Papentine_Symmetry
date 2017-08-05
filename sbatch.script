@@ -1,0 +1,18 @@
+#!/bin/bash -l
+#SBATCH --job-name=image_analysis
+
+#SBATCH --time=00
+#SBATCH --cpus-per-task=1
+#SBATCH --mem=100000mb
+#SBATCH --mail-type=ALL
+#SBATCH --mail-user=qhv200@nyu.edu
+#SBATCH --partition=aquila
+#SBATCH --nodelist=aquila3
+#SBATCH --share
+
+source activate image_complexity
+python main.py
+git pull
+git add -A
+git commit -m 'Add -A after python file finishes running'
+git push origin

@@ -60,6 +60,10 @@ chipman_human_scores = [
     18,
 ]
 
+chinese_human_scores = [
+    i for i in range(15)
+]
+
 
 def sort_picture(picture_names):
     change = False
@@ -184,7 +188,7 @@ if __name__ == '__main__':
         scores = []
         for pic in picture_names:
             scores.append(image_score[pic][column])
-        rho, p_value = spearmanr(chipman_human_scores, scores)
+        rho, p_value = spearmanr(chinese_human_scores, scores)
         rho = round(rho, 3)
         p_value = round(p_value, 3)
         worksheet.write(row + 1, col, str(rho))

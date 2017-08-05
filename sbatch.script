@@ -13,7 +13,6 @@
 
 source activate image_complexity
 cd /gpfsnyu/home/qhv200/Image_Analysis_Papentine_Symmetry
-git pull
 python main.py
 ssh qhv200@login2
 cd /gpfsnyu/home/qhv200/Image_Analysis_Papentine_Symmetry

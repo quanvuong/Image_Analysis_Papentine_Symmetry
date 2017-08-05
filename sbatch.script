@@ -11,6 +11,7 @@
 #SBATCH --share
 
 source activate image_complexity
+cd /gpfsnyu/home/qhv200/Image_Analysis_Papentine_Symmetry
 python main.py
 git pull
 git add -A

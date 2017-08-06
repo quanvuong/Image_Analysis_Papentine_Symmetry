@@ -150,11 +150,18 @@ if __name__ == '__main__':
 
     for picture in picture_names:
         image_matrix = convert_image(go_dir(picture, folder_name))
+
+        print('Finish converting picture', picture)
         cont_sym_score = sym_cont.cont_symmetry_score(image_matrix)
+
+        print('Finish cont_sym_score for', picture)
         dist_sym_score = sym_dist.dist_symmetry_score(image_matrix)
+
+        print('Finish dist_sym_score for', picture)
         papentine_score = papentine.papentine(image_matrix)
 
         print('Finish processing for picture', picture)
+        sys.stdout.flush()
         image_score[picture] = merge_three_dict(cont_sym_score, dist_sym_score, papentine_score)
 
     # writing data onto an excel file

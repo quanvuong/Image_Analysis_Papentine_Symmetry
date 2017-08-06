@@ -148,6 +148,9 @@ if __name__ == '__main__':
 
     picture_names = get_image_names(folder_name)
 
+    print(picture_names)
+    sys.stdout.flush()
+
     for picture in picture_names:
         image_matrix = convert_image(go_dir(picture, folder_name))
 

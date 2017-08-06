@@ -202,6 +202,8 @@ if __name__ == '__main__':
 
     workbook.close()
 
+    print('Saved analysis to', excel_file_name)
+
 # The commentted part below is for debugging
 # for picture in picture_names:
 

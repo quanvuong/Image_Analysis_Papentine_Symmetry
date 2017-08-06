@@ -223,6 +223,7 @@ if __name__ == '__main__':
                     print "Row {} Col {} - {} != {}".format(rownum+1, colnum+1, c1, c2)
         else:
             print "Row {} missing".format(rownum+1)
+    print('New Results equal to old unoptimized code results')
 
 
 # The commentted part below is for debugging

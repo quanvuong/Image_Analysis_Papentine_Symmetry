@@ -1,12 +1,10 @@
 import numpy as np 
 import copy
+import sys
 
 def rotate90(matrix):
-    "Rotate the image by 90 degree"
-    b = np.array(zip(*matrix))
-    for i in range(len(b)):
-        b[i] = b[i][::-1]
-    return b
+    "Rotate the image by 90 degree in clock wise direction"
+    return np.rot90(matrix, k=1, axes=(1, 0))
 
 def rotate180(matrix):
 
@@ -105,18 +103,10 @@ def num_pixel_matrix(matrix):
 def reflect_pos_diag(matrix):
     "Reflect a matrix along the positive diagonal"
 
-    temp_matrix = copy.deepcopy(matrix)
-    for i in range(len(matrix)):
-      temp_matrix[i] = temp_matrix[i][::-1]
+    rotated90_clockwise = rotate90(matrix)
+    reflected_with_np = np.flipud(rotated90_clockwise)
 
-    temp_matrix = zip(*temp_matrix)
-
-    for i in range(len(temp_matrix)):
-      temp_matrix[i] = temp_matrix[i][::-1]
-
-    temp_matrix = np.array(temp_matrix) 
-
-    return temp_matrix 
+    return reflected_with_np
 
 def reflect_neg_diag(matrix):
     "Reflect a matrix along the negative diagonal"

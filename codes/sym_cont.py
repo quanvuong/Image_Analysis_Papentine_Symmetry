@@ -3,14 +3,10 @@ import numpy as np
 import helpers
 from pprint import pprint
 
+
 def compare_two_matrix_cont(matrix_1, matrix_2):
     "Return the number of pixels in two matrixes that are the same"
-    num_pixel_same = 0 
-
-    for i in range(len(matrix_1)):
-        for j in range(len(matrix_2)):
-            if (matrix_1[i][j]==matrix_2[i][j]).all() == True:
-                num_pixel_same += 1 
+    num_pixel_same = np.count_nonzero(matrix_1 == matrix_2)
 
     return num_pixel_same
 

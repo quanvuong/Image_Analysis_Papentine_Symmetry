@@ -81,7 +81,7 @@ def cont_symmetry_score(matrix):
         twoseventy_degree_cont_temp += rotate270_cont_score(mini_matrix)
 
         ninety_180_270_cont_temp += ninety_degree_cont_temp + oneeighty_degree_cont_temp + twoseventy_degree_cont_temp
-        syn_cont_total_temp += ver_and_hor_diag_pos_and_neg_cont_temp + ninety_180_270_cont_temp 
+        syn_cont_total_temp += ver_and_hor_diag_pos_and_neg_cont_temp + ninety_180_270_cont_temp
 
     score = {'Continuous Left Right':ver_cont_temp, \
              'Continuous Up Down':hor_cont_temp, \

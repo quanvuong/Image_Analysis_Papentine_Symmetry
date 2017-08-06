@@ -152,12 +152,15 @@ if __name__ == '__main__':
         image_matrix = convert_image(go_dir(picture, folder_name))
 
         print('Finish converting picture', picture)
+        sys.stdout.flush()
         cont_sym_score = sym_cont.cont_symmetry_score(image_matrix)
 
         print('Finish cont_sym_score for', picture)
+        sys.stdout.flush()
         dist_sym_score = sym_dist.dist_symmetry_score(image_matrix)
 
         print('Finish dist_sym_score for', picture)
+        sys.stdout.flush()
         papentine_score = papentine.papentine(image_matrix)
 
         print('Finish processing for picture', picture)

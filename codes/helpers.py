@@ -1,7 +1,7 @@
 import numpy as np 
 import copy
 
-def rotate90(matrix): 
+def rotate90(matrix):
     "Rotate the image by 90 degree"
     b = np.array(zip(*matrix))
     for i in range(len(b)):
@@ -46,12 +46,9 @@ def get_mini_matrix(matrix, curr_col,  curr_row, size):
     "Return a mini-matrix knowing the x,y-position of the upper right corner item of the mini-matrix "
     "and the size of the mini-matrix "
 
-    mini_matrix = []
+    mini_matrix = matrix[curr_row:curr_row + size, curr_col:curr_col + size]
 
-    for i in range(size):
-        mini_matrix.append(matrix[curr_row + i][curr_col : curr_col + size])
-
-    return mini_matrix 
+    return mini_matrix
 
 def all_mini_matrix_specific_size(matrix, size):
     "Return all mini_matrix with the specific size in the matrix"

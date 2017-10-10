@@ -64,9 +64,6 @@ chinese_human_scores = [
     i for i in range(15)
 ]
 
-# human_scores = chipman_human_scores
-human_scores = chinese_human_scores
-
 def sort_picture(picture_names):
     change = False
 
@@ -139,6 +136,9 @@ if __name__ == '__main__':
     # Chinese data
     # folder_name = 'Chinese Characters/Chinese Compressed'
     # excel_file_name = 'Chinese Compressed Character Image Analysis.xlsx'
+
+    human_scores = chipman_human_scores
+    # human_scores = chinese_human_scores
 
     # image_score contains the scores of all images
     image_score = {}

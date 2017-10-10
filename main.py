@@ -11,9 +11,6 @@ import numpy as np
 from scipy.stats import spearmanr
 import pprint
 
-from itertools import izip_longest
-import xlrd
-
 
 chipman_human_scores = [
     0.4,

@@ -144,9 +144,8 @@ if __name__ == '__main__':
     # image_score contains the scores of all images
     image_score = {}
 
-    picture_names = get_image_names(folder_name)
-
-    # picture_names = ['Layer 1.png', 'Layer 2.png', 'Layer 3.png', 'Layer 4.png', 'Layer 5.png', 'Layer 6.png', 'Layer 7.png', 'Layer 8.png', 'Layer 9.png', 'Layer 10.png', 'Layer 11.png', 'Layer 12.png', 'Layer 13.png', 'Layer 14.png', 'Layer 15.png']
+    # picture_names = get_image_names(folder_name)
+    picture_names = ['Layer 1.png', 'Layer 2.png', 'Layer 3.png', 'Layer 4.png', 'Layer 5.png', 'Layer 6.png', 'Layer 7.png', 'Layer 8.png', 'Layer 9.png', 'Layer 10.png', 'Layer 11.png', 'Layer 12.png', 'Layer 13.png', 'Layer 14.png', 'Layer 15.png']
 
     for picture in picture_names:
         image_matrix = convert_image(go_dir(picture, folder_name))

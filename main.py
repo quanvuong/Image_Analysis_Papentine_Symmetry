@@ -130,15 +130,16 @@ def get_image_names(folder_name):
 if __name__ == '__main__':
 
     # The folder in which the images are in
-    folder_name = 'Chipman patterns'
-    excel_file_name = 'Chipman Image Analysis.xlsx'
+    # folder_name = 'Chipman patterns'
+    # excel_file_name = 'Chipman Image Analysis.xlsx'
 
     # Chinese data
-    # folder_name = 'Chinese Characters/Chinese Compressed'
+    folder_name = 'Chinese Characters/Chinese Compressed'
     # excel_file_name = 'Chinese Compressed Character Image Analysis.xlsx'
+    excel_file_name = 'Chinese Compressed Character both terms of L1.xlsx'
 
-    human_scores = chipman_human_scores
-    # human_scores = chinese_human_scores
+    # human_scores = chipman_human_scores
+    human_scores = chinese_human_scores
 
     # image_score contains the scores of all images
     image_score = {}
@@ -164,7 +165,9 @@ if __name__ == '__main__':
 
         print('Finish processing for picture', picture)
         sys.stdout.flush()
-        image_score[picture] = merge_three_dict(cont_sym_score, dist_sym_score, papentine_score)
+
+        image_score[picture] = papentine_score
+        # image_score[picture] = merge_three_dict(cont_sym_score, dist_sym_score, papentine_score)
 
     # writing data onto an excel file
     workbook = xlsxwriter.Workbook(excel_file_name)

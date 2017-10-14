@@ -2,20 +2,18 @@
 #SBATCH --job-name=image_analysis
 #SBATCH --output=output.slurm
 
-#SBATCH --time=00
+#SBATCH --time=10-00:00:00
 #SBATCH --cpus-per-task=1
-#SBATCH --mem=100000mb
+#SBATCH --mem=50000mb
 #SBATCH --mail-type=ALL
 #SBATCH --mail-user=qhv200@nyu.edu
-#SBATCH --partition=aquila
-#SBATCH --nodelist=aquila3
-#SBATCH --share
+#SBATCH --partition=serial
 
 source activate image_complexity
-cd /gpfsnyu/home/qhv200/Image_Analysis_Papentine_Symmetry
+cd /gpfsnyu/scratch/qhv200/misc/Image_Analysis_Papentine_Symmetry
 python main.py
 ssh qhv200@login2
-cd /gpfsnyu/home/qhv200/Image_Analysis_Papentine_Symmetry
+cd /gpfsnyu/scratch/qhv200/misc/Image_Analysis_Papentine_Symmetry
 git add -A
 git commit -m 'Add -A after python file finishes running'
 git push origin
